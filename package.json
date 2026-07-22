@@ -1,0 +1,25 @@
+{
+  "name": "ddex-ern-validate",
+  "version": "0.1.0",
+  "description": "Stateless DDEX ERN parse/validate service (ERN 4.3.x primary, 3.8.2 legacy) — pre-delivery QC for DDEX NewReleaseMessage payloads.",
+  "type": "module",
+  "license": "MIT",
+  "author": "wavbee",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wavbee/ddex-ern-validate.git"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "ddex-parser": "^0.4.5",
+    "fast-xml-parser": "^5.10.1",
+    "fastify": "^5.10.0"
+  }
+}

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ern:NewReleaseMessage xmlns:ern="http://ddex.net/xml/ern/43" MessageSchemaVersionId="ern/43" LanguageAndScriptCode="en">
+  <MessageHeader>
+    <MessageId>MSG00000001</MessageId>
+    <MessageSender>
+      <PartyId>PADPIDA2020010101A</PartyId>
+      <PartyName><FullName>WAVBEE Test Sender</FullName></PartyName>
+    </MessageSender>
+    <MessageRecipient>
+      <PartyId>PADPIDA2020010102B</PartyId>
+      <PartyName><FullName>Test Recipient DSP</FullName></PartyName>
+    </MessageRecipient>
+    <MessageCreatedDateTime>2026-01-01T00:00:00Z</MessageCreatedDateTime>
+  </MessageHeader>
+  <PartyList>
+    <Party>
+      <PartyReference>P1</PartyReference>
+      <PartyName><FullName>Test Artist</FullName></PartyName>
+    </Party>
+  </PartyList>
+  <ResourceList>
+    <SoundRecording>
+      <ResourceReference>A1</ResourceReference>
+      <Type>MusicalWorkSoundRecording</Type>
+      <ResourceId><ISRC>USRC17607839</ISRC></ResourceId>
+      <DisplayTitle><TitleText>Test Track One</TitleText></DisplayTitle>
+      <DisplayArtist SequenceNumber="1">
+        <ArtistPartyReference>P1</ArtistPartyReference>
+        <DisplayArtistRole>MainArtist</DisplayArtistRole>
+      </DisplayArtist>
+      <Duration>PT3M30S</Duration>
+      <SoundRecordingEdition>
+        <ResourceId><ISRC>USRC17607839</ISRC></ResourceId>
+        <TechnicalDetails>
+          <TechnicalResourceDetailsReference>T1</TechnicalResourceDetailsReference>
+          <File><URI>audio/track1.wav</URI></File>
+        </TechnicalDetails>
+      </SoundRecordingEdition>
+    </SoundRecording>
+  </ResourceList>
+  <ReleaseList>
+    <Release>
+      <ReleaseReference>R0</ReleaseReference>
+      <ReleaseType>Single</ReleaseType>
+      <ReleaseId><ICPN>0123456789012</ICPN></ReleaseId>
+      <DisplayTitleText>Test Release</DisplayTitleText>
+      <DisplayTitle><TitleText>Test Release</TitleText></DisplayTitle>
+      <DisplayArtist SequenceNumber="1">
+        <ArtistPartyReference>P1</ArtistPartyReference>
+        <DisplayArtistRole>MainArtist</DisplayArtistRole>
+      </DisplayArtist>
+      <ReleaseLabelReference>P1</ReleaseLabelReference>
+      <ResourceGroup>
+        <ResourceGroupContentItem>
+          <ReleaseResourceReference>A1</ReleaseResourceReference>
+        </ResourceGroupContentItem>
+      </ResourceGroup>
+    </Release>
+  </ReleaseList>
+  <DealList></DealList>
+</ern:NewReleaseMessage>
