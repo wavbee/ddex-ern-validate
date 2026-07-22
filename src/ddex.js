@@ -13,10 +13,24 @@
 // directly on the raw XML so it still works when the strict parser rejects an
 // incomplete-but-well-formed document.
 
+import { createRequire } from "node:module";
 import { XMLParser, XMLValidator } from "fast-xml-parser";
-import ddexPkg from "ddex-parser";
 
-const { DdexParser } = ddexPkg;
+// ddex-parser is a native (Rust) addon that ships prebuilt binaries for
+// darwin-arm64 and linux-x64-gnu only — notably NOT linux-arm64 — so on an
+// unsupported architecture its require() throws at load time. Load it defensively
+// (synchronously, via createRequire since it is CommonJS) so the service still
+// boots and serves Layer 1 (well-formedness + version sniff) even where the native
+// binary is missing; the parser layer then reports itself unavailable rather than
+// crashing the process. On the supported linux-x64 image the parser is always present.
+const require = createRequire(import.meta.url);
+let DdexParser = null;
+let ddexLoadError = null;
+try {
+  ({ DdexParser } = require("ddex-parser"));
+} catch (err) {
+  ddexLoadError = err;
+}
 
 // ERN version tokens — from MessageSchemaVersionId="ern/43" or the ddex.net
 // namespace suffix (.../ern/43) — mapped to dotted versions. ERN 4.3.x is the
@@ -104,8 +118,19 @@ export function sniff(xml) {
 }
 
 // Structural parse via ddex-parser. Returns a summary on success, or a
-// parser-layer error message on failure (missing required fields, etc.).
+// parser-layer error message on failure (missing required fields, unsupported
+// platform, etc.).
 export function parseSummary(xml) {
+  if (!DdexParser) {
+    return {
+      ok: false,
+      error: {
+        message: `DDEX parser unavailable on this platform: ${
+          ddexLoadError?.message ?? "native binding not loaded"
+        }`,
+      },
+    };
+  }
   try {
     const parser = new DdexParser();
     const r = parser.parseSync(xml);
