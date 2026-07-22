@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main, "feat/**"]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: test (node 24)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm test
+
+  docker:
+    name: docker build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Build image
+        run: docker build -t ddex-ern-validate:ci .
+      - name: Smoke-test the container
+        run: |
+          docker run -d --name ddex-ci -p 3000:3000 ddex-ern-validate:ci
+          for i in $(seq 1 15); do
+            if curl -fsS http://127.0.0.1:3000/healthz; then ok=1; break; fi
+            sleep 1
+          done
+          test -n "$ok" || { echo "healthz never came up"; docker logs ddex-ci; exit 1; }
+          echo
+          curl -fsS -X POST -H 'content-type: application/xml' \
+            --data-binary @test/fixtures/ern-4.3-newrelease.xml \
+            http://127.0.0.1:3000/validate
+          docker rm -f ddex-ci
