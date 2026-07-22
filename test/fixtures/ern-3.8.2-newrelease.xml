@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ern:NewReleaseMessage xmlns:ern="http://ddex.net/xml/ern/382" MessageSchemaVersionId="ern/382" LanguageAndScriptCode="en">
+  <MessageHeader>
+    <MessageId>MSG00000002</MessageId>
+    <MessageSender>
+      <PartyId>PADPIDA2020010101A</PartyId>
+      <PartyName><FullName>Legacy Sender</FullName></PartyName>
+    </MessageSender>
+    <MessageRecipient>
+      <PartyId>PADPIDA2020010102B</PartyId>
+      <PartyName><FullName>Legacy Recipient</FullName></PartyName>
+    </MessageRecipient>
+    <MessageCreatedDateTime>2026-01-01T00:00:00Z</MessageCreatedDateTime>
+  </MessageHeader>
+  <ResourceList>
+    <SoundRecording>
+      <SoundRecordingType>MusicalWorkSoundRecording</SoundRecordingType>
+      <ResourceReference>A1</ResourceReference>
+      <ReferenceTitle><TitleText>Legacy Track</TitleText></ReferenceTitle>
+      <SoundRecordingId><ISRC>USRC17607839</ISRC></SoundRecordingId>
+      <Duration>PT3M30S</Duration>
+    </SoundRecording>
+  </ResourceList>
+  <ReleaseList>
+    <Release>
+      <ReleaseReference>R0</ReleaseReference>
+      <ReleaseId><ICPN>0123456789012</ICPN></ReleaseId>
+      <ReferenceTitle><TitleText>Legacy Release</TitleText></ReferenceTitle>
+      <ReleaseType>Single</ReleaseType>
+    </Release>
+  </ReleaseList>
+</ern:NewReleaseMessage>

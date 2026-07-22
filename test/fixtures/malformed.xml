@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ern:NewReleaseMessage xmlns:ern="http://ddex.net/xml/ern/43">
+  <MessageHeader>
+    <MessageId>MSG_BROKEN</MessageId>
+  </MessageHeader>
+  <ReleaseList>
+    <Release>
+      <ReleaseReference>R0</ReleaseReference>
+    </ReleaseList>
+</ern:NewReleaseMessage>
